@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Login = () => {
   const { role } = useParams();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -15,10 +16,7 @@ const Login = () => {
       setError("Both fields are required.");
       return;
     }
-
-    // Add login logic here
-    console.log("Logging in with:", { email, password });
-    setError(""); // Clear the error on successful submission
+    navigate(`/${role}/dashboard`);
   };
 
   return (
@@ -28,7 +26,7 @@ const Login = () => {
     >
       <div className="bg-yellow-200 p-8 rounded-lg shadow-md max-w-md w-full">
         <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">
-          Login as {role}
+          Login as <h2 className="inline-block capitalize">{role}</h2>
         </h2>
 
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
